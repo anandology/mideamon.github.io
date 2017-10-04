@@ -110,7 +110,8 @@
 								$&nbsp;<span class="prompt"></span>
 								<span class="terminal-data">roro deploy</span>
 								<br/>
-								<span class="terminal-data">Deploying credit-risk ...</span>
+								<span class="terminal-data">Deploying project credit-risk. This may take a few moments ...
+</span>
 								<br/>
 								<span class="terminal-data">Building docker image ... done</span>
 								<br/>
@@ -118,9 +119,9 @@
 								<br/>
 								<span class="terminal-data">Restarting services ...</span>
 								<br/>
-								<span class="terminal-data">&nbsp; &nbsp; web: https://credit-risk.rorocloud.io/</span>
+								<span class="terminal-data">&nbsp; &nbsp; default: https://credit-risk.rorocloud.io/</span>
 								<br/>
-								<span class="terminal-data">&nbsp; &nbsp; credit-grade: https://credit-risk-credit-grade.rorocloud.io/</span>
+								<span class="terminal-data">&nbsp; &nbsp; api: https://credit-risk--api.rorocloud.io/</span>
 								<br/>
 								<br/>
 								<span class="terminal-data">Deployed v1 of credit-risk project</span>
@@ -212,34 +213,20 @@
 														$&nbsp;<span class="prompt"></span>
 														<span class="terminal-data">roro deploy</span>
 														<br/>
-														<span class="terminal-data">Deploying credit-risk ...</span>
+														<span class="terminal-data">Deploying project credit-risk. This may take a few moments ...</span>
 														<br/>
 														<span class="terminal-data">Building docker image ... done</span>
 														<br/>
 														<span class="terminal-data">Updating scheduled jobs ... done</span>
 														<br/>
-														<span class="terminal-data">Restarting services ...</span>
+														<span class="terminal-data">Restarted 2 services.
+</span>
 														<br/>
 														<span class="terminal-data">&nbsp &nbsp web: https://credit-risk.rorocloud.io/</span>
 														<br/>
-														<span class="terminal-data">&nbsp &nbsp credit-grade: https://credit-risk-credit-grade.rorocloud.io/</span>
+														<span class="terminal-data">&nbsp &nbsp api: https://credit-risk--api.rorocloud.io/</span>
 														<br/>
 														<span class="terminal-data">Deployed v1 of credit-risk project</span>
-														<br/>
-														<br/>
-														<div class="history"></div>
-														$&nbsp;<span class="prompt"></span>
-														<span class="terminal-data">roro credit-risk ls</span>
-														<br/>
-														<span class="terminal-data">/data</span>
-														<br/>
-														<span class="terminal-data">/notebooks</span>
-														<br/>
-														<span class="terminal-data">predict.py</span>
-														<br/>
-														<span class="terminal-data">roro.yml</span>
-														<br/>
-														<span class="terminal-data">train.py</span>
 														<br/>
 														<br/>
 														<div class="history"></div>
@@ -248,26 +235,30 @@
 														<br/>
 														<span class="terminal-data">project: credit-risk</span>
 														<br/>
-														<span class="terminal-data">runtime: python3 tensorflow</span>
+														<span class="terminal-data">runtime: python3-keras</span>
 														<br/>
 														<br/>
 														<span class="terminal-data">services:</span>
 														<br/>
-														<span class="terminal-data">&nbsp; - name: default</span>
+														<span class="terminal-data">&nbsp;&nbsp;- name: default</span>
 														<br/>
-														<span class="terminal-data">&nbsp; - function: predict.predict</span>
+														<span class="terminal-data">&nbsp;&nbsp;&nbsp;&nbsp;function: predict.predict</span>
 														<br/>
-														<span class="terminal-data">&nbsp; - size: C1</span>
+														<span class="terminal-data">&nbsp;&nbsp;&nbsp;&nbsp;size: C1</span>
+														<br/>
+														<span class="terminal-data">&nbsp;&nbsp;- name: api</span>
+														<br/>
+														<span class="terminal-data">&nbsp;&nbsp;&nbsp;&nbsp;function: credit_risk_api:find_credit_grade</span>
 														<br/>
 														<span class="terminal-data">tasks:</span>
 														<br/>
-														<span class="terminal-data">&nbsp; - name: train</span>
+														<span class="terminal-data">&nbsp;&nbsp;- name: train</span>
 														<br/>
-														<span class="terminal-data">&nbsp; - command: python train.py</span>
+														<span class="terminal-data">&nbsp;&nbsp;&nbsp;&nbsp;command: python train.py</span>
 														<br/>
-														<span class="terminal-data">&nbsp; - size: C2</span>
+														<span class="terminal-data">&nbsp;&nbsp;&nbsp;&nbsp;size: C2</span>
 														<br/>
-														<span class="terminal-data">&nbsp; - when: everyday at 11:55</span>
+														<span class="terminal-data">&nbsp;&nbsp;&nbsp;&nbsp;when: every day at 11:55</span>
 														<br/>
 														<br/>
 													</section>
@@ -318,7 +309,7 @@
 												 	 <section class="terminal" >
 															<div class="history"></div>
 															$&nbsp;<span class="prompt"></span>
-															<span class="terminal-data">roro run -size C64 train.py</span>
+															<span class="terminal-data">roro run --size C64 train.py</span>
 															<br/>
 															<span class="terminal-data">Created new job b42c02a0</span>
 															<br/>
@@ -447,48 +438,17 @@
 															<br/>
 															<br/>
 															<div class="history"></div>
+
 															$&nbsp;<span class="prompt"></span>
-															<span class="terminal-data">roro run:notebook</span>
-															<br/>
-															<span class="terminal-data">Created new job 60984179</span>
-															<br/>
-															<br/>
-															<span class="terminal-data">Jupyter notebook is available at:</span>
-															<br/>
-															<span class="terminal-data">https://60984179.rorocloud.io/?token=LNRZDpHdPhGLzf00</span>
-															<br/>
-															<br/>
-															<span class="terminal-data">The jupyter notebook server can be stopped using:</span>
-															<br/>
-															<span class="terminal-data">roro stop 60984179</span>
-															<br/>
-															<br/>
-															<div class="history"></div>
-															$&nbsp;<span class="prompt"></span>
-															<span class="terminal-data">cat roro.yml</span>
-															<br/>
-															<span class="terminal-data">project: credit-risk</span>
-															<br/>
-															<span class="terminal-data">runtime: python3 tensorflow</span>
-															<br/>
-															<br/>
-															<span class="terminal-data">services:</span>
-															<br/>
-															<span class="terminal-data">&nbsp; - name: default</span>
-															<br/>
-															<span class="terminal-data">&nbsp; - function: predict.predict</span>
-															<br/>
-															<span class="terminal-data">&nbsp; - size: C1</span>
-															<br/>
-															<span class="terminal-data">jobs:</span>
-															<br/>
-															<span class="terminal-data">&nbsp; - name: train</span>
-															<br/>
-															<span class="terminal-data">&nbsp; - command: python train.py</span>
-															<br/>
-															<span class="terminal-data">&nbsp; - size: C2</span>
-															<br/>
-															<span class="terminal-data">&nbsp; - when: everyday at 10AM IST</span>
+															<span class="terminal-data">roro models:show credit-risk:4</span><br/>
+															<span class="terminal-data">Model-ID: 4fbe8871</span><br/>
+															<span class="terminal-data">Model-Name: credit-risk</span><br/>
+															<span class="terminal-data">Model-Version: 4</span><br/>
+															<span class="terminal-data">Date: 2017-09-27 15:46:31</span><br/>
+															<span class="terminal-data">Content-Encoding: joblib</span><br/>
+															<span class="terminal-data">Algo: DecisionTree</span><br/>
+															<span class="terminal-data">Accuracy: 0.85</span><br/>
+															<span class="terminal-data">Parameters: max_depth=4;random_state=12345;criterion=gini</span><br/>
 															<br/>
 															<br/>
 														</section>
